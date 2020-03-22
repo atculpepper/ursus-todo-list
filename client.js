@@ -5,6 +5,7 @@ let toDo = [];
 function init() {
   console.log("Looks like we are connected :)");
   $(".js-addTask-btn").on("click", clickAddNewTask);
+  $(".js-list").on("click", ".js-btn-complete", clickComplete);
 }
 
 function clickAddNewTask(event) {
@@ -29,14 +30,19 @@ function addNewTask() {
   render();
 }
 
+function clickComplete(event) {
+  console.log("Complete Clicked");
+}
+
 function render() {
   console.log("rendering stuff");
   const $jsList = $(".js-list");
   $jsList.empty();
   for (let aTask of toDo) {
-    let completeBtn = "<button>Complete</button>";
+    let completeBtn = '<button class="js-btn-complete">Complete</button>';
     if (aTask.completed === true) {
-      completeBtn = "<button disabled>Complete</button>";
+      completeBtn =
+        '<button class="js-btn-complete" disabled>Complete</button>';
     }
     $(".js-list").append(`<li>${aTask.name} ${completeBtn}</li>`);
   }
