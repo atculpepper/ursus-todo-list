@@ -30,14 +30,14 @@ function addNewTask() {
 }
 
 function render() {
+  console.log("rendering stuff");
   const $jsList = $(".js-list");
   $jsList.empty();
   for (let aTask of toDo) {
-    $(".js-list").append(
-      `<li class = "js-bullet-item" >` +
-        aTask.name +
-        `</li>` +
-        `<button class = "toggle-btn btn" data-inline = "true" >Complete</button>`
-    );
+    let completeBtn = "<button>Complete</button>";
+    if (aTask.completed === true) {
+      completeBtn = "<button disabled>Complete</button>";
+    }
+    $(".js-list").append(`<li>${aTask.name} ${completeBtn}</li>`);
   }
 }
