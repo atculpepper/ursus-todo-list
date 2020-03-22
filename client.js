@@ -31,19 +31,28 @@ function addNewTask() {
 }
 
 function clickComplete(event) {
-  console.log("Complete Clicked");
+  console.log("Complete Clicked", this);
+  const itemIndex = $(this).data("index");
+  console.log(itemIndex);
+
+  if (toDo[itemIndex].completed === true) {
+    toDo[itemIndex].completed = false;
+  } else {
+    toDo[itemIndex].completed = true;
+  }
+  render();
 }
 
 function render() {
   console.log("rendering stuff");
   const $jsList = $(".js-list");
   $jsList.empty();
-  for (let aTask of toDo) {
-    let completeBtn = '<button class="js-btn-complete">Complete</button>';
-    if (aTask.completed === true) {
-      completeBtn =
-        '<button class="js-btn-complete" disabled>Complete</button>';
+  for (let i = 0; i < toDo.length; i++) {
+    const task = toDo[i];
+    let completeBtn = `<button data-index="${i}"class="js-btn-complete">Complete</button>`;
+    if (task.completed === true) {
+      completeBtn = `<button data-index="${i}" class="js-btn-complete" disabled>Complete</button>`;
     }
-    $(".js-list").append(`<li>${aTask.name} ${completeBtn}</li>`);
+    $(".js-list").append(`<li>${task.name} ${completeBtn}</li>`);
   }
 }
