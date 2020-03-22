@@ -49,10 +49,14 @@ function render() {
   $jsList.empty();
   for (let i = 0; i < toDo.length; i++) {
     const task = toDo[i];
-    let completeBtn = `<button data-index="${i}"class="js-btn-complete">Complete</button>`;
+    let bgClass = "notCompleted";
+    let completeBtn = `<button data-index="${i}"class="js-btn-complete btn">Complete</button>`;
     if (task.completed === true) {
-      completeBtn = `<button data-index="${i}" class="js-btn-complete" disabled>Complete</button>`;
+      bgClass = "isComplete";
+      completeBtn = `<button data-index="${i}" class="js-btn-complete btn" disabled>Complete</button>`;
     }
-    $(".js-list").append(`<li>${task.name} ${completeBtn}</li>`);
+    $(".js-list").append(
+      `<li class="${bgClass}">${task.name} ${completeBtn}</li>`
+    );
   }
 }
